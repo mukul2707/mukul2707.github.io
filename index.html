@@ -1,0 +1,127 @@
+<html>
+<head>
+    <title>Typing Tutor</title>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    
+    <style>
+    
+       .mainDiv{
+           width: 100%;
+           height: 100%;
+           position: relative;
+           background: lightblue;    
+           font: 12px;
+        }
+        
+        .centerDiv{
+            text-align: center;
+            color: black;
+        }
+        
+    
+    
+    </style>
+   
+    <div class="mainDiv">
+         
+      <div class= "centerDiv"> 
+         <h1>Welcome to Typing Speed Test  </h1>
+          
+          <h2 id="msg"></h2>
+
+          <br>
+          <textarea  id = "mywords"  spellcheck="true" cols="188" rows="20"  placeholder="Typing....." ></textarea>
+          <br><br>
+          <button id="btn" class="mainBtn">Start</button>
+          
+        </div>
+    </div>
+    
+    
+    
+     <script>
+  
+          const msg = document.getElementById("msg");    
+          const mywords = document.getElementById("mywords"); 
+          const btn = document.getElementById("btn");
+          const btn2 = document.getElementById("btn2");
+         
+          mywords.disabled=true;
+             
+          
+          let startTime, endTime;
+      
+          const playGame = () =>{
+            let date = new Date();
+            startTime = date.getTime();
+              
+          
+              
+            btn.innerText = "Done";
+              
+           msg.innerText = "";
+              eraseText();
+           }
+     
+         const endPlay =() =>{
+            let date = new Date();
+            endTime = date.getTime();
+            let totalTime = ((endTime - startTime)/(1000));
+             console.log(totalTime);
+             
+             
+         
+             let total = mywords.value;
+             
+                let wordcount = (wordCounter (total) );
+                 let speed = Math.round((wordcount/totalTime)*60);
+                let final = "WPM = " + speed +" | " + "Total Words = " + wordcount + " | " + "Total Time = " + totalTime + " "+"sec";
+        
+                  msg.innerText = final;
+             
+                 
+                 
+        
+      }
+         function eraseText() {
+                document.getElementById("mywords").value = "";
+               }
+      
+       const wordCounter = (str) =>{
+           let response = str.split(" ").length;
+            console.log(response);
+            return response
+        }
+        
+        
+        btn.addEventListener('click', function(){
+            console.log(this)
+            
+            if(this.innerText == "Start"){
+                
+                mywords.disabled = false;
+                
+                
+                playGame();
+            } else if(this.innerText == "Done"){
+                    mywords.disabled = true;
+                    
+                    btn.innerText = "Start";
+                    
+                    
+                    endPlay(); 
+                    
+                    
+                  }
+        })
+    </script>
+    
+    
+    </head>
+</html>
